@@ -9,9 +9,6 @@ const config = {
   output: {
     path: path.resolve(__dirname, 'static'),
     filename: 'app.bundle.js',
-    clean: {
-      keep: ['index.html'],
-    },
   },
   module: {
     rules: [
