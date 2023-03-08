@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import IssueAdd from './IssueAdd.jsx';
 import IssueFilter from './IssueFilter.jsx';
 
@@ -47,13 +47,8 @@ const IssueRow = ({ issue }) => {
 
 export default function IssueList({status}) {
   const [issues, setIssues] = useState([]);
-  const [statusFilter, setStatusFilter ] = useState(status.get('status'));
+  const [ statusFilter ] = useState(status.get('status'));
   const location = useLocation();
-  const navigate = useNavigate();
-
-  function setFilter(query) {
-    navigate({pathname: location.pathname, query})
-  }
 
   const createIssue = newIssue => {
     fetch('/api/issues', {
@@ -80,37 +75,37 @@ export default function IssueList({status}) {
       });
   };
 
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        // let url = '/api/issues';
-        // if (statusFilter) {
-        //     url += `?status=${statusFilter}`;
-        // }
-        const response = await fetch(`/api/issues${location.search}`);
-        if (response.ok) {
-          const data = await response.json();
-          console.log('Total count of records: ', data._metaData.total_count);
-          data.records.forEach(issue => {
-            issue.created = new Date(issue.created);
-            if (issue.completionDate) issue.completionDate = new Date(issue.completionDate);
-          });
-          setIssues(data.records);
-        } else {
-          const error = await response.json();
-          alert('Failed to fetch issues:' + error.message);
-        }
-      } catch (err) {
-        console.log('Error in fetching data from server:', err);
+  const loadData = async () => {
+    try {
+      const response = await fetch(`/api/issues${location.search}`);
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Total count of records: ', data._metaData.total_count);
+        data.records.forEach(issue => {
+          issue.created = new Date(issue.created);
+          if (issue.completionDate) issue.completionDate = new Date(issue.completionDate);
+        });
+        setIssues(data.records);
+      } else {
+        const error = await response.json();
+        alert('Failed to fetch issues:' + error.message);
       }
-    };
-    setStatusFilter(status.get('status'))
+    } catch (err) {
+      console.log('Error in fetching data from server:', err);
+    }
+  };
+
+  useEffect(() => {
+    if (statusFilter === location.search.status) {
+      return;
+    }
     loadData();
-  }, [statusFilter]);
+  }, [location.search]);
 
   return (
     <div>
-      <IssueFilter setFilter={setFilter} />
+      {/* <IssueFilter setFilter={setFilter} /> */}
+      <IssueFilter />
       <hr />
       <h1>{status? status.get('status'): null}</h1>
       <IssueTable issues={issues} />

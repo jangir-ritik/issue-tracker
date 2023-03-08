@@ -18,7 +18,7 @@ const App = () => {
       </div>
       <div className="contents">
         <Routes>
-          <Route path="/" element={<Navigate to="/issues" />} />
+          <Route path="/" element={<Navigate status={searchParams} to="/issues" />} />
           <Route path="/issues" element={<IssueList status={searchParams} />} />
           <Route path="/issues/:id" element={<IssueEdit />} />
           <Route path="*" element={<NoMatch />} />
