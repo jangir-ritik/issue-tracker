@@ -9,8 +9,6 @@ const NoMatch = () => <p>Page Not Found</p>;
 
 const App = () => { 
   const [searchParams] = useSearchParams()
-  const location = useLocation();
-  console.log(location)
   return (
     <div>
       <div className="header">

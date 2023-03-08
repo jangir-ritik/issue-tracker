@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = void 0;
+exports["default"] = validateIssue;
 var validIssueStatus = {
   New: true,
   Open: true,
@@ -30,11 +30,13 @@ function validateIssue(issue) {
       return "".concat(field, " is required.");
     }
   }
-  if (!validIssueStatus[issue.status]) return "".concat(issue.status, " is not a valid status.");
+  if (!validIssueStatus[issue.status]) {
+    return "".concat(issue.status, " is not a valid status.");
+  }
   return null;
 }
-var _default = {
-  validateIssue: validateIssue
-};
-exports["default"] = _default;
+
+// export default {
+//   validateIssue,
+// };
 //# sourceMappingURL=issue.js.map

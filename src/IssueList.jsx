@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import IssueAdd from './IssueAdd.jsx';
 import IssueFilter from './IssueFilter.jsx';
 
@@ -45,10 +45,19 @@ const IssueRow = ({ issue }) => {
   );
 };
 
+
 export default function IssueList({status}) {
   const [issues, setIssues] = useState([]);
   const [ statusFilter ] = useState(status.get('status'));
   const location = useLocation();
+  const navigate = useNavigate();
+
+  function setFilter(query) {
+    navigate({
+      pathname: location.pathname,
+      search: `?status=${query}`
+    });
+  }
 
   const createIssue = newIssue => {
     fetch('/api/issues', {
@@ -104,8 +113,8 @@ export default function IssueList({status}) {
 
   return (
     <div>
-      {/* <IssueFilter setFilter={setFilter} /> */}
-      <IssueFilter />
+      <IssueFilter setFilter={setFilter} />
+      {/* <IssueFilter /> */}
       <hr />
       <h1>{status? status.get('status'): null}</h1>
       <IssueTable issues={issues} />
