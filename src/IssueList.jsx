@@ -3,7 +3,15 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import IssueAdd from './IssueAdd.jsx';
 import IssueFilter from './IssueFilter.jsx';
 
-const IssueTable = ({ issues }) => {
+const IssueTable = ({ issues, loadData }) => {
+  function deleteIssue(id) {
+    console.log('Deleting issue:', id);
+    fetch(`/api/issues/${id}`, { method: 'DELETE' }).then(response => {
+      console.log('Delete response:', response);
+      if (!response.ok) alert('Failed to delete issue');
+      else loadData();
+    });
+  }
   return (
     <table className="bordered-table">
       <thead>
@@ -15,19 +23,23 @@ const IssueTable = ({ issues }) => {
           <th>Effort</th>
           <th>Completion Date</th>
           <th>Title</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         {issues.map(issue => (
-          <IssueRow key={issue._id} issue={issue} />
+        <IssueRow key={issue._id} deleteIssue={deleteIssue} issue={issue} />
         ))}
       </tbody>
     </table>
   );
 };
 
-const IssueRow = ({ issue }) => {
+const IssueRow = ({ issue, deleteIssue }) => {
   const borderedStyle = { border: '1px solid silver', padding: 4 };
+  function onDeleteClick() {
+    deleteIssue(issue._id);
+  }
   return (
     <tr>
       <td style={borderedStyle}>
@@ -41,6 +53,7 @@ const IssueRow = ({ issue }) => {
         {issue.completionDate ? issue.completionDate.toDateString() : ''}
       </td>
       <td style={borderedStyle}>{issue.title}</td>
+      <td><button onClick={onDeleteClick}>Delete</button></td>
     </tr>
   );
 };
@@ -117,7 +130,7 @@ export default function IssueList({status}) {
       {/* <IssueFilter /> */}
       <hr />
       <h1>{status? status.get('status'): null}</h1>
-      <IssueTable issues={issues} />
+      <IssueTable loadData={loadData} issues={issues} />
       <hr />
       <IssueAdd createIssue={createIssue} />
     </div>
