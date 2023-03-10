@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import Button from "@mui/material/Button"
+import Paper from '@mui/material/Paper';
 
 export default function IssueEdit({ onSubmit }) {
   const { id } = useParams();
@@ -90,9 +92,14 @@ export default function IssueEdit({ onSubmit }) {
         Title:{' '}
         <input name="title" size={50} value={issue.title} onChange={handleOnChange} />
         <br />
-        <button type="submit">Submit</button>
+        {/* <button type="submit">Submit</button> */}
+        <Button variant="contained" type="submit">Submit</Button>
         <Link to="/issues">Back to issue list</Link>
+        <Paper />
       </form>
+      <div>
+      
+    </div>
     </div>
   );
 }
