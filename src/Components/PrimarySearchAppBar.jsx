@@ -15,7 +15,8 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import { Mail } from '@mui/icons-material';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
-import Button from "@mui/material/Button"
+// import Button from "@mui/material/Button"
+import { Brightness3, WbSunny } from '@mui/icons-material';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -55,6 +56,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
       width: '20ch',
     },
   },
+}));
+
+const TransparentAppBar = styled(AppBar)(({ theme }) => ({
+  backgroundColor: 'transparent',
+  boxShadow: 'none',
+  borderBottom: `1px solid ${theme.palette.primary.main}`,
 }));
 
 export default function PrimarySearchAppBar({ themeMode, setThemeMode }) {
@@ -190,40 +197,17 @@ export default function PrimarySearchAppBar({ themeMode, setThemeMode }) {
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
-          <Button variant='contained' onClick={toggleThemeMode}>
-              {themeMode === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
-            </Button>
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="error">
-                {/* <MailIcon /> */}
-                <Mail />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
+          <Box sx={{ display: { xs: 'flex' } }}>
+            {/* <Button variant='contained' onClick={toggleThemeMode}>
+              {themeMode === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
+            </Button> */}
+            <IconButton onClick={toggleThemeMode}>
+              {themeMode === 'light' ? <Brightness3 /> : <WbSunny />}
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
+            {/* <IconButton
               size="large"
               aria-label="show more"
               aria-controls={mobileMenuId}
@@ -232,7 +216,7 @@ export default function PrimarySearchAppBar({ themeMode, setThemeMode }) {
               color="inherit"
             >
               <MoreIcon />
-            </IconButton>
+            </IconButton> */}
           </Box>
         </Toolbar>
       </AppBar>
