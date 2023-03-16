@@ -18,8 +18,55 @@ export const lightTheme = createTheme({
 export const darkTheme = createTheme({
   palette: {
     mode: 'dark',
+    // primary: {
+    //   main: '#071a2e',
+    // },
     primary: {
-      main: '#172A4E',
+      50: "#e3f2fd",
+      100: "#bbdefb",
+      200: "#90caf9",
+      300: "#64b5f6",
+      400: "#42a5f5",
+      500: "#2196f3",
+      600: "#1e88e5",
+      700: "#1976d2",
+      800: "#1565c0",
+      900: "#0d47a1",
+      // main: "#172A4E",
+      main: "#071a2e",
+      A100: "#82b1ff",
+      A200: "#448aff",
+      A400: "#2979ff",
+      A700: "#2962ff",
+      light: "#64b5f6",
+      dark: "#1976d2",
+      contrastText: "#fff"
+    },
+    primaryDark: {
+      50: "#E2EDF8",
+      100: "#CEE0F3",
+      200: "#91B9E3",
+      300: "#5090D3",
+      400: "#265D97",
+      500: "#1E4976",
+      600: "#173A5E",
+      700: "#132F4C",
+      800: "#001E3C",
+      900: "#0A1929",
+      main: "#5090D3"
+    },
+    action: {
+      active: "#fff",
+      hover: "rgba(255, 255, 255, 0.08)",
+      hoverOpacity: 0.08,
+      selected: "rgba(255, 255, 255, 0.16)",
+      selectedOpacity: 0.16,
+      disabled: "rgba(255, 255, 255, 0.3)",
+      disabledBackground: "rgba(255, 255, 255, 0.12)",
+      disabledOpacity: 0.38,
+      focus: "rgba(255, 255, 255, 0.12)",
+      focusOpacity: 0.12,
+      activatedOpacity: 0.24
     },
     secondary: {
       main: '#D15B00',
@@ -27,6 +74,15 @@ export const darkTheme = createTheme({
     background: {
       default: '#001e3c',
       paper: '#001e3c'
+    },
+    text: {
+      primary: '#fff',
+      secondary: '#B2BAC2',
+      disabled: 'rgba(255, 255, 255, 0.5)',
+      icon: 'rgba(255, 255, 255, 0.5)'
+    },
+    shape: {
+      borderRadius: '10px'
     },
   },
 });
