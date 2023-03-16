@@ -17,14 +17,16 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 // import Button from "@mui/material/Button"
 import { Brightness3, WbSunny } from '@mui/icons-material';
+import { lightTheme, darkTheme } from './ThemeProvider.jsx';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  borderRadius: theme === 'light' ? darkTheme.palette.shape.borderRadius : darkTheme.palette.shape.borderRadius,
+  backgroundColor: alpha(theme === 'light' ? lightTheme.palette.secondary.main : darkTheme.palette.primaryDark[700], 0.4),
   '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
+    backgroundColor: alpha(theme === 'light' ? lightTheme.palette.secondary.main : darkTheme.palette.primaryDark[500], 0.4),
   },
+  border: `1px solid ${theme === 'light' ? lightTheme.palette.secondary.main : darkTheme.palette.primaryDark[600]}`,
   marginRight: theme.spacing(2),
   marginLeft: 0,
   width: '100%',
@@ -38,6 +40,7 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
   padding: theme.spacing(0, 2),
   height: '100%',
   position: 'absolute',
+  color: theme === 'light' ? lightTheme.palette.secondary.main : darkTheme.palette.primary[300],
   pointerEvents: 'none',
   display: 'flex',
   alignItems: 'center',
@@ -59,9 +62,16 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const TransparentAppBar = styled(AppBar)(({ theme }) => ({
-  backgroundColor: 'transparent',
+  backgroundColor: alpha(theme === 'light' ? lightTheme.palette.secondary.main : darkTheme.palette.primaryDark[900], 0.7),
+  backgroundImage: 'none',
+  display: 'block !important',
   boxShadow: 'none',
-  borderBottom: `1px solid ${theme.palette.primary.main}`,
+  // borderBottom: `1px solid ${theme === 'light' ? lightTheme.palette.secondary.main : darkTheme.palette.primaryDark[500]}`,
+  backdropFilter: 'blur(8px)',
+  boxShadow: `inset 0px -1px 1px ${theme === 'light' ? lightTheme.palette.secondary.main : darkTheme.palette.primaryDark[700]}`,
+  position: 'sticky',
+  top: 0,
+  padding: '0 4rem',
 }));
 
 export default function PrimarySearchAppBar({ themeMode, setThemeMode }) {
@@ -169,9 +179,10 @@ export default function PrimarySearchAppBar({ themeMode, setThemeMode }) {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <TransparentAppBar position="static" theme={themeMode}>
+      {/* <AppBar position="static"> */}
         <Toolbar>
-          <IconButton
+          {/* <IconButton
             size="large"
             edge="start"
             color="inherit"
@@ -179,7 +190,7 @@ export default function PrimarySearchAppBar({ themeMode, setThemeMode }) {
             sx={{ mr: 2 }}
           >
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
           <Typography
             variant="h6"
             noWrap
@@ -190,7 +201,7 @@ export default function PrimarySearchAppBar({ themeMode, setThemeMode }) {
           </Typography>
           <Search>
             <SearchIconWrapper>
-              <SearchIcon />
+              <SearchIcon color='inherit'/>
             </SearchIconWrapper>
             <StyledInputBase
               placeholder="Search…"
@@ -219,7 +230,8 @@ export default function PrimarySearchAppBar({ themeMode, setThemeMode }) {
             </IconButton> */}
           </Box>
         </Toolbar>
-      </AppBar>
+      </TransparentAppBar>
+      {/* </AppBar> */}
       {renderMobileMenu}
       {renderMenu}
     </Box>
