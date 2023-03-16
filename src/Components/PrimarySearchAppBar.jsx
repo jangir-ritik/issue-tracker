@@ -51,6 +51,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
+    fontWeight:'300',
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
@@ -66,7 +67,6 @@ const TransparentAppBar = styled(AppBar)(({ theme }) => ({
   backgroundImage: 'none',
   display: 'block !important',
   boxShadow: 'none',
-  // borderBottom: `1px solid ${theme === 'light' ? lightTheme.palette.secondary.main : darkTheme.palette.primaryDark[500]}`,
   backdropFilter: 'blur(8px)',
   boxShadow: `inset 0px -1px 1px ${theme === 'light' ? lightTheme.palette.secondary.main : darkTheme.palette.primaryDark[700]}`,
   position: 'sticky',
@@ -213,8 +213,8 @@ export default function PrimarySearchAppBar({ themeMode, setThemeMode }) {
             {/* <Button variant='contained' onClick={toggleThemeMode}>
               {themeMode === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
             </Button> */}
-            <IconButton onClick={toggleThemeMode}>
-              {themeMode === 'light' ? <Brightness3 /> : <WbSunny />}
+            <IconButton sx={{ backgroundColor: themeMode === 'light' ? lightTheme.palette.secondary.main : darkTheme.palette.primaryDark[900], border: `1px solid ${themeMode === 'light' ? lightTheme.palette.secondary.main : darkTheme.palette.primaryDark[600]}`,}} onClick={toggleThemeMode}>
+              {themeMode === 'light' ? <Brightness3 /> : <WbSunny sx={{color: themeMode === 'light' ? lightTheme.palette.secondary.main : darkTheme.palette.primary[300]}} />}
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
