@@ -26,9 +26,9 @@ const App = () => {
         <Box sx={{ marginTop: 2, height: '100vh' }} component="main">
           <Routes>
             <Route path="/" element={<Navigate status={searchParams} to="/issues" />} />
-            <Route path="/issues" element={<IssueList status={searchParams} />} />
-            <Route path="/issues/:id" element={<IssueEdit />} />
-            <Route path="*" element={<NoMatch />} />
+            <Route path="/issues" element={<IssueList themeMode={themeMode} setThemeMode={setThemeMode} status={searchParams} />} />
+            <Route path="/issues/:id" themeMode={themeMode} setThemeMode={setThemeMode} element={<IssueEdit />} />
+            <Route path="*" themeMode={themeMode} setThemeMode={setThemeMode} element={<NoMatch />} />
           </Routes>
           {/* </div> */}
         </Box>

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import IssueAdd from './IssueAdd.jsx';
 import IssueFilter from './IssueFilter.jsx';
+import DataTable from './Components/DataTable.jsx';
+import Container from '@mui/material/Container';
 
 const IssueTable = ({ issues, loadData }) => {
   function deleteIssue(id) {
@@ -57,7 +59,6 @@ const IssueRow = ({ issue, deleteIssue }) => {
     </tr>
   );
 };
-
 
 export default function IssueList({status}) {
   const [issues, setIssues] = useState([]);
@@ -130,7 +131,10 @@ export default function IssueList({status}) {
       {/* <IssueFilter /> */}
       <hr />
       <h1>{status? status.get('status'): null}</h1>
-      <IssueTable loadData={loadData} issues={issues} />
+      {/* <IssueTable loadData={loadData} issues={issues} /> */}
+      <Container>
+        <DataTable />
+      </Container>
       <hr />
       <IssueAdd createIssue={createIssue} />
     </div>

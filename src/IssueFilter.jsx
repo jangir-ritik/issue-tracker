@@ -1,5 +1,9 @@
 import React, { useContext, useState } from 'react';
 import { Link,  } from 'react-router-dom';
+import DiscreteSlider from './Components/DiscreteSlider.jsx';
+import Container from '@mui/material/Container';
+import Chip from '@mui/material/Chip';
+import Box from '@mui/material/Box';
 
 const Separator = () => <span> | </span>;
 
@@ -9,11 +13,20 @@ function IssueFilter({ setFilter }) {
     const [effortGte, setEffortGte] = useState('');
     const [effortLte, setEffortLte] = useState('');
     const [changed, setChanged] = useState(false);
+    const [selectedStatus, setSelectedStatus] = useState('');
+
   
-    const onChangeStatus = (e) => {
-      setStatus(e.target.value);
-      setChanged(true);
+    const handleStatusChange = (status) => {
+      setSelectedStatus(status);
+      setFilter(status);
     };
+
+    const statusOptions = ['New', 'Open', 'Assigned', 'Fixed', 'Verified', 'Closed'];
+
+    // const onChangeStatus = (e) => {
+    //   setStatus(e.target.value);
+    //   setChanged(true);
+    // };
   
     const onChangeEffortGte = (e) => {
       const effortValue = e.target.value.replace(/\D/g, '');
@@ -64,8 +77,9 @@ function IssueFilter({ setFilter }) {
     //         Assigned Issues
     //     </Link>
     // </div>
-   <div>
-      Status:
+  //  <div>
+      <Container>
+      {/* Status:
       <select value={status} onChange={onChangeStatus}>
         <option value="">(Any)</option>
         <option value="New">New</option>
@@ -74,17 +88,33 @@ function IssueFilter({ setFilter }) {
         <option value="Fixed">Fixed</option>
         <option value="Verified">Verified</option>
         <option value="Closed">Closed</option>
-      </select>
-      &nbsp;Effort between:
+      </select> */}
+      <Container sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', py: 2 }}>
+        {statusOptions.map((status) => (
+          <Chip
+            key={status}
+            label={status}
+            color={selectedStatus === status ? 'primary' : 'default'}
+            onClick={() => handleStatusChange(status)}
+            sx={{ mr: 1, mb: 1 }}
+          />
+        ))}
+        <Box sx={{ ml: 'auto' }}>
+          <DiscreteSlider />
+        </Box>
+      </Container>
+      {/* &nbsp;Effort between:
       <input size={5} value={effortGte} onChange={onChangeEffortGte} />
       &nbsp;-&nbsp;
+
       <input size={5} value={effortLte} onChange={onChangeEffortLte} />
       <button onClick={applyFilter}>Apply</button>
       <button onClick={resetFilter} disabled={!changed}>
         Reset
       </button>
-      <button onClick={clearFilter}>Clear</button>
-    </div>
+      <button onClick={clearFilter}>Clear</button> */}
+    {/* </div> */}
+    </Container>
     );
     }
 
