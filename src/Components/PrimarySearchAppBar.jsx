@@ -16,7 +16,7 @@ import { Mail } from '@mui/icons-material';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 // import Button from "@mui/material/Button"
-import { Brightness3, WbSunny } from '@mui/icons-material';
+import { Brightness3, WbSunny, AddCircle } from '@mui/icons-material';
 import { lightTheme, darkTheme } from './ThemeProvider.jsx';
 
 const Search = styled('div')(({ theme }) => ({
@@ -213,6 +213,9 @@ export default function PrimarySearchAppBar({ themeMode, setThemeMode }) {
             {/* <Button variant='contained' onClick={toggleThemeMode}>
               {themeMode === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
             </Button> */}
+            <IconButton sx={{ backgroundColor: themeMode === 'light' ? lightTheme.palette.secondary.main : darkTheme.palette.primaryDark[900], border: `1px solid ${themeMode === 'light' ? lightTheme.palette.secondary.main : darkTheme.palette.primaryDark[600]}`,}} >
+              <AddCircle sx={{color: themeMode === 'light' ? lightTheme.palette.secondary.main : darkTheme.palette.primary[300]}} />
+            </IconButton>
             <IconButton sx={{ backgroundColor: themeMode === 'light' ? lightTheme.palette.secondary.main : darkTheme.palette.primaryDark[900], border: `1px solid ${themeMode === 'light' ? lightTheme.palette.secondary.main : darkTheme.palette.primaryDark[600]}`,}} onClick={toggleThemeMode}>
               {themeMode === 'light' ? <Brightness3 /> : <WbSunny sx={{color: themeMode === 'light' ? lightTheme.palette.secondary.main : darkTheme.palette.primary[300]}} />}
             </IconButton>

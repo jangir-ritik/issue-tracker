@@ -4,8 +4,19 @@ import DiscreteSlider from './Components/DiscreteSlider.jsx';
 import Container from '@mui/material/Container';
 import Chip from '@mui/material/Chip';
 import Box from '@mui/material/Box';
+import { AccessAlarm, Assignment, AssignmentInd, AssignmentTurnedIn, CheckCircle, TaskAlt, Verified, BugReport } from '@mui/icons-material';
+
 
 const Separator = () => <span> | </span>;
+
+export const statusOptions = [
+  { value: 'New', label: 'New', icon: <Assignment /> },
+  { value: 'Open', label: 'Open', icon: <BugReport /> },
+  { value: 'Assigned', label: 'Assigned', icon: <AssignmentInd /> },
+  { value: 'Fixed', label: 'Fixed', icon: <TaskAlt /> },
+  { value: 'Verified', label: 'Verified', icon: <Verified /> },
+  { value: 'Closed', label: 'Closed', icon: <CheckCircle /> },
+];
 
 function IssueFilter({ setFilter }) {
     // console.log(setFilter("Open"), " => setFilter ")
@@ -21,7 +32,7 @@ function IssueFilter({ setFilter }) {
       setFilter(status);
     };
 
-    const statusOptions = ['New', 'Open', 'Assigned', 'Fixed', 'Verified', 'Closed'];
+    // const statusOptions = ['New', 'Open', 'Assigned', 'Fixed', 'Verified', 'Closed'];
 
     // const onChangeStatus = (e) => {
     //   setStatus(e.target.value);
@@ -92,10 +103,11 @@ function IssueFilter({ setFilter }) {
       <Container sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', py: 2 }}>
         {statusOptions.map((status) => (
           <Chip
-            key={status}
-            label={status}
-            color={selectedStatus === status ? 'primary' : 'default'}
-            onClick={() => handleStatusChange(status)}
+            key={status.value}
+            label={status.label}
+            color={selectedStatus === status.value ? 'primary' : 'default'}
+            icon={status.icon}
+            onClick={() => handleStatusChange(status.value)}
             sx={{ mr: 1, mb: 1 }}
           />
         ))}

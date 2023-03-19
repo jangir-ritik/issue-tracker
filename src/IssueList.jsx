@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import IssueAdd from './IssueAdd.jsx';
 import IssueFilter from './IssueFilter.jsx';
-import DataTable from './Components/DataTable.jsx';
+import DataTable from './Components/DataTable.js';
 import Container from '@mui/material/Container';
 
 const IssueTable = ({ issues, loadData }) => {
@@ -133,7 +133,7 @@ export default function IssueList({status}) {
       <h1>{status? status.get('status'): null}</h1>
       {/* <IssueTable loadData={loadData} issues={issues} /> */}
       <Container>
-        <DataTable />
+        <DataTable loadData={loadData} issues={issues} />
       </Container>
       <hr />
       <IssueAdd createIssue={createIssue} />

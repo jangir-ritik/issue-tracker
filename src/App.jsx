@@ -28,7 +28,7 @@ const App = () => {
             <Route path="/" element={<Navigate status={searchParams} to="/issues" />} />
             <Route path="/issues" element={<IssueList themeMode={themeMode} setThemeMode={setThemeMode} status={searchParams} />} />
             <Route path="/issues/:id" themeMode={themeMode} setThemeMode={setThemeMode} element={<IssueEdit />} />
-            <Route path="*" themeMode={themeMode} setThemeMode={setThemeMode} element={<NoMatch />} />
+            <Route path="*" element={<NoMatch />} />
           </Routes>
           {/* </div> */}
         </Box>
