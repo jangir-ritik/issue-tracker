@@ -213,7 +213,7 @@ export default function PrimarySearchAppBar({ themeMode, setThemeMode }) {
             {/* <Button variant='contained' onClick={toggleThemeMode}>
               {themeMode === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
             </Button> */}
-            <IconButton sx={{ backgroundColor: themeMode === 'light' ? lightTheme.palette.secondary.main : darkTheme.palette.primaryDark[900], border: `1px solid ${themeMode === 'light' ? lightTheme.palette.secondary.main : darkTheme.palette.primaryDark[600]}`,}} >
+            <IconButton sx={{ backgroundColor: themeMode === 'light' ? lightTheme.palette.secondary.main : darkTheme.palette.primaryDark[900], border: `1px solid ${themeMode === 'light' ? lightTheme.palette.secondary.main : darkTheme.palette.primaryDark[600]}`,}} onClick={open} >
               <AddCircle sx={{color: themeMode === 'light' ? lightTheme.palette.secondary.main : darkTheme.palette.primary[300]}} />
             </IconButton>
             <IconButton sx={{ backgroundColor: themeMode === 'light' ? lightTheme.palette.secondary.main : darkTheme.palette.primaryDark[900], border: `1px solid ${themeMode === 'light' ? lightTheme.palette.secondary.main : darkTheme.palette.primaryDark[600]}`,}} onClick={toggleThemeMode}>
