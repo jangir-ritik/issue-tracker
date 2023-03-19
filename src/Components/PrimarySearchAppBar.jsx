@@ -18,6 +18,9 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 // import Button from "@mui/material/Button"
 import { Brightness3, WbSunny, AddCircle } from '@mui/icons-material';
 import { lightTheme, darkTheme } from './ThemeProvider.jsx';
+import { IssueAddDialog } from './IssueAddDialog.js';
+import { useState } from 'react';
+
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -75,11 +78,25 @@ const TransparentAppBar = styled(AppBar)(({ theme }) => ({
 }));
 
 export default function PrimarySearchAppBar({ themeMode, setThemeMode }) {
+  const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  const handleIssueAddDialogOpen = () => {
+    setOpen(true);
+  };
+
+  const handleIssueAddDialogClose = () => {
+    setOpen(false);
+  };
+
+  const handleIssueAddSubmit = (issue) => {
+    // Submit the issue to your backend or update the state with the new issue
+    console.log(issue);
+  };
 
   function toggleThemeMode() {
     setThemeMode(themeMode === 'light' ? 'dark' : 'light');
@@ -217,9 +234,18 @@ export default function PrimarySearchAppBar({ themeMode, setThemeMode }) {
             {/* <Button variant='contained' onClick={toggleThemeMode}>
               {themeMode === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
             </Button> */}
-            <IconButton sx={{ backgroundColor: themeMode === 'light' ? lightTheme.palette.secondary.main : darkTheme.palette.primaryDark[900], border: `1px solid ${themeMode === 'light' ? lightTheme.palette.secondary.main : darkTheme.palette.primaryDark[600]}`,}} onClick={handleIssueModalOpen} >
-              <AddCircle sx={{color: themeMode === 'light' ? lightTheme.palette.secondary.main : darkTheme.palette.primary[300]}} />
-            </IconButton>
+            <div>
+              <IconButton
+                sx={{
+                  backgroundColor: themeMode === 'light' ? lightTheme.palette.secondary.main : darkTheme.palette.primaryDark[900],
+                  border: `1px solid ${themeMode === 'light' ? lightTheme.palette.secondary.main : darkTheme.palette.primaryDark[600]}`,
+                }}
+                onClick={handleIssueAddDialogOpen}
+              >
+                Add Issue
+              </IconButton>
+              <IssueAddDialog open={open} onClose={handleIssueAddDialogClose} onSubmit={handleIssueAddSubmit} />
+            </div>
             <IconButton sx={{ backgroundColor: themeMode === 'light' ? lightTheme.palette.secondary.main : darkTheme.palette.primaryDark[900], border: `1px solid ${themeMode === 'light' ? lightTheme.palette.secondary.main : darkTheme.palette.primaryDark[600]}`,}} onClick={toggleThemeMode}>
               {themeMode === 'light' ? <Brightness3 /> : <WbSunny sx={{color: themeMode === 'light' ? lightTheme.palette.secondary.main : darkTheme.palette.primary[300]}} />}
             </IconButton>
